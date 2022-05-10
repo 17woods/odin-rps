@@ -10,4 +10,86 @@
 <body>
     
 </body>
+
+<script>
+    function capitalize(str) {
+        return (str[0].toUpperCase() + str.slice(1));
+    }
+
+    function computerPlay() {
+        const compNum = Math.floor(Math.random() * 3);
+        switch(compNum) {
+            case 0:
+                return "rock";
+            case 1:
+                return "paper";
+            case 2: 
+                return "scissors";
+            default:
+                return "E0";
+        }
+    }
+
+    function play(compChoice, playerChoice="rock") {
+        playerChoice = playerChoice.toLowerCase();
+
+        if (compChoice === playerChoice) {
+            return 2;
+        }
+        
+        if (playerChoice == "rock") {
+            if (compChoice == "paper") {
+                return 0;
+            } else if (compChoice == "scissors") {
+                return 1;
+            }
+        } else if (playerChoice == "paper") {
+            if (compChoice == "rock") {
+                return 1;
+            } else if (compChoice == "scissors") {
+                return 0;
+            }
+        } else if (playerChoice == "scissors") {
+            if (compChoice == "rock") {
+                return 0;
+            } else if (compChoice == "paper") {
+                return 1;
+            }
+        }
+    }
+    
+    function game() {
+        let cPoints = 0;
+        let pPoints = 0;
+        let result = [];
+        while (cPoints < 5 && pPoints < 5) {
+            let cChoice = computerPlay().toLowerCase();
+            let pChoice = prompt("Enter: ")
+            result = play(cChoice, pChoice);
+            
+            switch(result) {
+                case 0:
+                    cPoints += 1;
+                    console.log(`You win the round! ${capitalize(pChoice)} beats ${cChoice}!`);
+                case 1:
+                    pPoints += 1;
+                    console.log(`You lose the round! ${capitalize(pChoice)} loses to ${cChoice}!`);
+                case 2:
+                    console.log(`A tie! You both picked ${pChoice.ca}!`);
+            }
+
+            console.log(result, cPoints, pPoints);
+        }
+
+        if (cPoints == 5) {
+            return "c";
+        }
+
+        if (pPoints == 5) {
+            return "p";
+        }
+    }
+
+    console.log(game());
+</script>
 </html>
